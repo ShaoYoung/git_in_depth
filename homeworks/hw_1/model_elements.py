@@ -15,8 +15,8 @@ class Type:
 
 
 class Poligon:
-    def __init__(self):
-        self.points = Point3D()
+    def __init__(self, points: [Point3D]):
+        self.points = points
 
 
 class Texture:
@@ -24,9 +24,11 @@ class Texture:
 
 
 class PoligonalModel:
-    def __init__(self):
-        self.poligons = Poligon()
-        self.textures = Texture()
+    def __init__(self, poligons: [Poligon], textures: [Texture]):
+        # д.быть хотя бы один
+        self.poligons = poligons
+        self.poligons.append(Poligon([Point3D]))
+        self.textures = textures
 
 
 class Flash:
@@ -43,27 +45,29 @@ class Flash:
         pass
 
 
-class Scene:
+class Camera:
     def __init__(self):
+        self.location = Point3D()
+        self.angle = Angle3D()
+
+    def rotate(self, angle3d: Angle3D):
+        pass
+
+    def move(self, point3d: Point3D):
+        pass
+
+
+class Scene:
+    def __init__(self, models: [PoligonalModel], flash: [Flash], camera: [Camera]):
         self.id = int()
-        self.models = [PoligonalModel]
-        self.flashes = Flash()
-        self.camera = [Camera]
+        self.models = models
+        self.models.append(PoligonalModel([Poligon], [Texture]))
+        self.flashes = flash
+        self.camera = camera
+        self.camera.append(Camera)
 
     def method_1(self, type: Type) -> Type:
         return type
 
     def method_2(self, type_1: Type, type_2: Type) -> Type:
         return type_1
-
-
-class Camera:
-    def __init__(self):
-        self.location = Point3D()
-        self.angle = Angle3D()
-
-    def rotate(self, angle3d):
-        pass
-
-    def move(self, point3d):
-        pass
