@@ -1,14 +1,16 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
+from carrier import Carrier
 
 
 class Ticket:
-    def __init__(self, id: int, price: float, place: int, date_time: datetime, is_valid: bool):
+    def __init__(self, id: int, price: float, place: int, date_time: datetime, carrier: Carrier):
         self.id = id
         self.price = price
         self.place = place
         self.date_time = date_time
-        self.is_valid = is_valid
+        self.carrier = carrier
+        self.status = True
 
 
 class ITicketRepo(ABC):
@@ -53,7 +55,4 @@ class TicketProvider:
     def find_tickets(self, date_time: datetime, city: str) -> [Ticket]:
         return self.ticket_repo.search(date_time, city)
 
-    def get_tickets(self, ticket: Ticket, count: int) -> [Ticket]:
-        self.ticket_repo.update(ticket, False)
-        return [Ticket]
 
